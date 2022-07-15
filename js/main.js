@@ -5,7 +5,8 @@
         lightBox = document.querySelector('.lightbox'),
         closeBut = lightBox.querySelector('.close'),
         houseName = document.querySelector('.house-name'),
-        houseInfo = document.querySelector('.house-desc');
+        houseInfo = document.querySelector('.house-desc'),
+        bannerImages = document.querySelector('#houseImages');
 
     const houseData = [
         [`stark`, `stark house info`], // index 0 => houseData[0][0], houseData[0][1]
@@ -23,6 +24,14 @@
         // this.dataset.offset is the data-offset attribute defined on that html tag
         houseName.textContent = `House ${houseData[this.dataset.offset][0]}`;
         houseInfo.textContent = houseData[this.dataset.offset][1];
+
+        // each banner image is 600 px wide, so multiply that by a numerator
+        let animationTotal = 600 * this.dataset.offset;
+
+        // actually change the CSS an animate the banner
+        bannerImages.style.right = `${animationTotal}px`;
+
+        console.log('move the banner images', animationTotal);
     }
 
     function openLightbox() {
@@ -38,8 +47,7 @@
     }
 
     // event handling here (how is the user going to interact with stuff)
-    //sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
-
+    sigils.forEach(sigil => sigil.addEventListener('click', openLightbox));
     sigils.forEach(sigil => sigil.addEventListener('click', showHouseData));
 
     houseVid.addEventListener('ended', closeLightbox);
